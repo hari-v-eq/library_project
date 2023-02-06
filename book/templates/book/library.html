@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+{% load static %}
+<html>
+<head>
+    <title>Books App</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+</head>
+<body style="background-color:#4DB6AC;">
+<nav class="navbar navbar-light" style="background-color:#f8f5f5;">
+    <a href="#" class="navbar-brand" style="background-color:#FFCC33;color:#000000;border-width:3px;border-color:#FFCC33;border-style:solid;border-spacing:20px;border-radius: 30px;">Library App</a>
+    <!-- <a class="navbar-link btn-lg" href="{% url 'index' %}" style="background-color:#FFCC33;color:#000000;">DataFlair</a> -->
+    <a href="{% url 'admin:index' %}" class = 'navbar-link btn-lg' style="background-color:#FFCC33;color:#000000;border-width:3px;border-color:#FFCC33;border-style:solid;border-spacing:20px;border-radius: 30px;">Admin</a>
+    <a href="{% url 'upload-book' %}" class="navbar-link btn-lg" style="background-color:#FFCC33;color:#000000;border-width:3px;border-color:#FFCC33;border-style:solid;border-spacing:20px;border-radius: 30px;">Upload Books</a>
+</nav>
+<br>
+{% block content %}
+<div class="card-columns">
+    {% for book in shelf %}
+    <div class="card" style="width: 15rem">
+<img class="card-img-top" style="overflow:hidden"  src="{{ book.picture.url }}">
+  <div class="card-body" >
+    <h6 class="card-title">Book Name: {{ book.name }}</h6>
+    <p class="card-text">About: {{ book.description }}</p>
+    <p class="card-title">Author:{{book.author}}</p>
+   <div class="card-footer bg-transparent border-dark">
+  
+    <center>
+       <a href="update/{{book.id}}" class="btn btn-warning" style="box-shadow:6px -6px 8px #9d9d9d, -6px 6px 8px #ffffff;" id = '{{book.id}}'>edit</a>
+       <a href="delete/{{book.id}}" class="btn btn-danger" style="box-shadow:6px -6px 8px #9d9d9d, -6px 6px 8px #ffffff;" id = '{{book.id}}'>delete</a>
+    </center>
+    </div>
+  </div>
+</div>
+    {% endfor %}
+</div>
+{% endblock %}
+</body>
+</html>
